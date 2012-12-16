@@ -95,6 +95,10 @@ public:
 	// Tell the thread to stop processing.
 	virtual void Cancel();
 
+	// Delay processing of the current thread and let others take the
+	// core.
+	static void Yield();
+
 protected:
 	// The method to be run when the thread is up.
 	virtual void Run() = 0;

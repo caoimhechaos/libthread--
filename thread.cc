@@ -90,4 +90,10 @@ Thread::IsCancelled()
 {
 	return cancelled_;
 }
+
+void
+Thread::Yield()
+{
+	pthread_yield();
+}
 }  // namespace threadpp
