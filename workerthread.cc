@@ -46,7 +46,8 @@ WorkerThread::Run()
 	{
 		google::protobuf::Closure* work =
 			queue_->GetNextTask();
-		work->Run();
+		if (work)
+			work->Run();
 	}
 }
 }  // namespace threadpp
