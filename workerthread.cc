@@ -39,6 +39,11 @@ WorkerThread::WorkerThread(ThreadQueue* queue)
 {
 }
 
+WorkerThread::~WorkerThread()
+{
+	Cancel();
+}
+
 void
 WorkerThread::Run()
 {

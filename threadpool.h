@@ -142,7 +142,6 @@ protected:
 	void Run();
 
 	ThreadQueue* queue_;
-	bool shutdown_requested_;
 };
 
 // Pool of preconfigured threads where given work items can be run.
