@@ -1,6 +1,7 @@
 *.la
 *.lo
 *.o
+*_test
 .deps
 .libs
 Makefile
