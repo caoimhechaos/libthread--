@@ -29,6 +29,8 @@
 
 #include "threadpool.h"
 
+#include <google/protobuf/stubs/common.h>
+
 namespace threadpp
 {
 ClosureThread::ClosureThread(google::protobuf::Closure* c)
