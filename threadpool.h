@@ -65,17 +65,17 @@ public:
 	virtual ~ThreadQueue();
 
 	// Add the closure "t" to the list of tasks to be executed.
-	void Add(google::protobuf::Closure* t);
+	virtual void Add(google::protobuf::Closure* t);
 
 	// Get the next closure to run from the queue.
-	google::protobuf::Closure* GetNextTask();
+	virtual google::protobuf::Closure* GetNextTask();
 
 	// Wait until the thread queue is empty, for shutting down.
 	// This will leave the queue in a locked state and thus unusable!
-	void WaitUntilEmpty();
+	virtual void WaitUntilEmpty();
 
 	// Delete everything from the queue without actually running it.
-	void Clear();
+	virtual void Clear();
 
 protected:
 	QQueue<google::protobuf::Closure*> queued_threads_;
@@ -139,7 +139,7 @@ public:
 protected:
 	// Called by the thread constructor to retrieve tasks from the
 	// queue and run them.
-	void Run();
+	virtual void Run();
 
 	ThreadQueue* queue_;
 };
@@ -156,10 +156,10 @@ public:
 	virtual ~ThreadPool();
 
 	// Add the closure "t" to the list of tasks to be executed.
-	void Add(google::protobuf::Closure* t);
+	virtual void Add(google::protobuf::Closure* t);
 
 	// Delete all tasks from the pool.
-	void Clear();
+	virtual void Clear();
 
 protected:
 	ThreadQueue tasks_;
