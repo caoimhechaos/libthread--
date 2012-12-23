@@ -1,4 +1,4 @@
-TESTS=				closurethread_test thread_test
+TESTS=				threadqueue_test closurethread_test thread_test
 check_PROGRAMS=			${TESTS}
 lib_LTLIBRARIES=		libthread++.la
 threadppdir=			${includedir}/thread++
@@ -14,3 +14,6 @@ thread_test_LDADD=	${GTEST_LIBS} ${lib_LTLIBRARIES}
 
 closurethread_test_SOURCES=	closurethread_test.cc
 closurethread_test_LDADD=	${GTEST_LIBS} ${PROTO_LIBS} ${lib_LTLIBRARIES}
+
+threadqueue_test_SOURCES=	threadqueue_test.cc
+threadqueue_test_LDADD=		${GTEST_LIBS} ${PROTO_LIBS} ${lib_LTLIBRARIES}
