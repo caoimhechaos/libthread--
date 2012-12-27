@@ -50,7 +50,7 @@ ThreadError::String()
 void*
 Thread::CallHelper(void *thread)
 {
-	Thread* t = reinterpret_cast<Thread*>(thread);
+	Thread* t = static_cast<Thread*>(thread);
 	t->Run();
 	return NULL;
 }
