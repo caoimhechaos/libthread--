@@ -120,6 +120,9 @@ public:
 	// This will not take ownership of "c".
 	ClosureThread(google::protobuf::Closure* c);
 
+	// Cancel the thread.
+	virtual ~ClosureThread();
+
 protected:
 	// Invokes the closure given to the constructor.
 	virtual void Run();
