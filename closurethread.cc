@@ -38,6 +38,11 @@ ClosureThread::ClosureThread(google::protobuf::Closure* c)
 {
 }
 
+ClosureThread::~ClosureThread()
+{
+	Cancel();
+}
+
 void
 ClosureThread::Run()
 {
