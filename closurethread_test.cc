@@ -39,7 +39,7 @@ TEST_F(ClosureThreadTest, DoesRun)
 {
 	QMutex mtx;
 	QWaitCondition done;
-	bool has_run;
+	bool has_run = false;
 	TestFoo foo(&mtx, &has_run, &done);
 
 	// Lock the done mutex to ensure we won't get the notification before
