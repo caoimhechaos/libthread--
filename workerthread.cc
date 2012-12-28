@@ -35,7 +35,7 @@
 namespace threadpp
 {
 WorkerThread::WorkerThread(ThreadQueue* queue)
-: queue_(queue), Thread()
+: Thread(), queue_(queue)
 {
 }
 

@@ -34,7 +34,7 @@
 namespace threadpp
 {
 ClosureThread::ClosureThread(google::protobuf::Closure* c)
-: closure_(c), Thread()
+: Thread(), closure_(c)
 {
 }
 
