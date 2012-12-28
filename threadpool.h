@@ -118,7 +118,7 @@ class ClosureThread : public Thread
 public:
 	// Create a thread which runs the closure given as "c".
 	// This will not take ownership of "c".
-	ClosureThread(google::protobuf::Closure* c);
+	explicit ClosureThread(google::protobuf::Closure* c);
 
 	// Cancel the thread.
 	virtual ~ClosureThread();
