@@ -41,6 +41,8 @@ QT_LIBS=""
 PROTO_LIBS=""
 AC_CHECK_LIB([gtest], [main],
 	     [GTEST_LIBS="$GTEST_LIBS -lgtest"])
+AC_CHECK_LIB([gmock], [main],
+	     [GTEST_LIBS="$GTEST_LIBS -lgmock"])
 AC_CHECK_LIB([gtest_main], [main],
 	     [GTEST_LIBS="$GTEST_LIBS -lgtest_main"])
 AC_CHECK_LIB([QtCore], [main],
