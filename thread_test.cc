@@ -15,8 +15,8 @@ namespace testing
 class TestThread : public Thread
 {
 public:
-	explicit TestThread(QMutex* mtx, QWaitCondition* done)
-	: mtx_(mtx), done_(done), has_run_(false) {}
+	TestThread(QMutex* mtx, QWaitCondition* done)
+	: done_(done), mtx_(mtx), has_run_(false) {}
 
 	bool HasRun() {
 		return has_run_;
