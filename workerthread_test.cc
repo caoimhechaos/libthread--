@@ -46,6 +46,7 @@ class WorkerThreadTest : public ::testing::Test
 TEST_F(WorkerThreadTest, ExitsWithoutWorkQueue)
 {
 	WorkerThread t(0);
+	t.Start();
 }
 
 TEST_F(WorkerThreadTest, RunAndCancelSelf)
@@ -65,6 +66,7 @@ TEST_F(WorkerThreadTest, RunAndCancelSelf)
 		.RetiresOnSaturation();
 
 	t = new WorkerThread(&q);
+	t->Start();
 	delete t;  // Should wait for the thread to finish.
 }
 

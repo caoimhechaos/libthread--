@@ -49,6 +49,7 @@ TEST_F(ThreadTest, DoesRun)
 	mtx.lock();
 
 	TestThread t(&mtx, &done);
+	t.Start();
 	Thread::Yield();
 	done.wait(&mtx);
 	EXPECT_TRUE(t.HasRun());

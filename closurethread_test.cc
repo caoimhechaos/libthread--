@@ -48,6 +48,7 @@ TEST_F(ClosureThreadTest, DoesRun)
 
 	ClosureThread t(google::protobuf::NewCallback(
 				&foo, &TestFoo::TestBody));
+	t.Start();
 	ClosureThread::Yield();
 	done.wait(&mtx);
 	EXPECT_TRUE(has_run);
