@@ -47,7 +47,7 @@ WorkerThread::~WorkerThread()
 void
 WorkerThread::Run()
 {
-	while (!IsCancelled())
+	while (queue_ && !IsCancelled())
 	{
 		google::protobuf::Closure* work =
 			queue_->GetNextTask();

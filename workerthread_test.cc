@@ -43,6 +43,11 @@ class WorkerThreadTest : public ::testing::Test
 {
 };
 
+TEST_F(WorkerThreadTest, ExitsWithoutWorkQueue)
+{
+	WorkerThread t(0);
+}
+
 TEST_F(WorkerThreadTest, RunAndCancelSelf)
 {
 	int fake_argc = 0;
