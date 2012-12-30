@@ -58,6 +58,11 @@ Thread::CallHelper(void *thread)
 Thread::Thread()
 : cancelled_(false)
 {
+}
+
+Thread*
+Thread::Start()
+{
 	int err;
 	pthread_attr_t attr;
 	err = pthread_attr_init(&attr);
@@ -72,6 +77,8 @@ Thread::Thread()
 	err = pthread_attr_destroy(&attr);
 	if (err)
 		throw new ThreadError(err);
+
+	return this;
 }
 
 Thread::~Thread()

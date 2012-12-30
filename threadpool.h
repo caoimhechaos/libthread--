@@ -92,6 +92,9 @@ public:
 	// Wait for the thread to end and destroy the object.
 	virtual ~Thread();
 
+	// Start execution of the thread.
+	virtual Thread* Start();
+
 	// Tell the thread to stop processing.
 	virtual void Cancel();
 
