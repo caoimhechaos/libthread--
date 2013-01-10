@@ -102,6 +102,9 @@ public:
 	// core.
 	static void Yield();
 
+	// Wait until the thread finishes execution.
+	virtual void WaitForFinished();
+
 protected:
 	// The method to be run when the thread is up.
 	virtual void Run() = 0;
