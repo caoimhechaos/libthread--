@@ -1,0 +1,21 @@
+Source: libthread++
+Priority: extra
+Maintainer: Caoimhe Chaos <caoimhechaos@protonmail.com>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev
+Standards-Version: 3.9.3
+Section: libs
+Homepage: http://git.ancient-solutions.com/cgi-bin/gitweb.cgi?p=base/libthread++.git;a=summary
+Vcs-Git: http://git.ancient-solutions.com/base/libthread++.git
+Vcs-Browser: http://git.ancient-solutions.com/cgi-bin/gitweb.cgi?p=base/libthread++.git;a=summary
+
+Package: libthread++-dev
+Section: libdevel
+Architecture: any
+Depends: libthread++1 (= ${binary:Version})
+Description: Development libraries and headers for Threads in C++:
+
+Package: libthread++1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: C++ library for using threads in various ways.
