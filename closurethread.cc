@@ -40,7 +40,7 @@ ClosureThread::ClosureThread(google::protobuf::Closure* c)
 
 ClosureThread::~ClosureThread()
 {
-	Cancel();
+	WaitForFinished();
 }
 
 void

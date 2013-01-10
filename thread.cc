@@ -81,9 +81,14 @@ Thread::Start()
 	return this;
 }
 
-Thread::~Thread()
+void
+Thread::WaitForFinished()
 {
 	pthread_join(thread_, NULL);
+}
+
+Thread::~Thread()
+{
 }
 
 void
