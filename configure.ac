@@ -67,8 +67,14 @@ AC_CHECK_HEADERS([QtCore/QMap QtCore/QString])
 CPPFLAGS="$old_CPPFLAGS"
 
 # Checks for typedefs, structures, and compiler characteristics.
+AC_CHECK_HEADER_STDBOOL
+AC_TYPE_UINT32_T
 
 # Checks for library functions.
+orig_LIBS="$LIBS"
+LIBS="$LIBS $PTHREAD_LIBS"
+AC_CHECK_FUNCS(pthread_yield)
+LIBS="$orig_LIBS"
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
