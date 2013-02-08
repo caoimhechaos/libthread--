@@ -106,6 +106,8 @@ Thread::IsCancelled()
 void
 Thread::Yield()
 {
+#ifdef HAVE_PTHREAD_YIELD
 	pthread_yield();
+#endif /* HAVE_PTHREAD_YIELD */
 }
 }  // namespace threadpp
