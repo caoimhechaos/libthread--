@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([libtoolbox], [0.1], [caoimhechaos@protonmail.com])
+AC_INIT([libtoolbox], [0.9.1], [caoimhechaos@protonmail.com])
 AC_CONFIG_SRCDIR([threadpool.h])
 AC_CONFIG_HEADERS([config.h])
 
@@ -29,8 +29,14 @@ AC_SUBST(LIBRARY_VERSION)
 OLDCXXFLAGS="$CXXFLAGS"
 CXXFLAGS="$CXXFLAGS -std=c++11"
 AC_MSG_CHECKING([whether $CXX accepts -std=c++11])
-AC_LINK_IFELSE([AC_LANG_CALL([], [main])], [AC_MSG_RESULT(yes)],
-	[AC_MSG_RESULT(no); CXXFLAGS="$OLDCXXFLAGS"])
+AC_LINK_IFELSE([AC_LANG_CALL([], [main])], [AC_MSG_RESULT(yes)], [
+		AC_MSG_RESULT(no)
+		CXXFLAGS="$OLDCXXFLAGS -std=c++0x"
+		AC_MSG_CHECKING([whether $CXX accepts -std=c++0x])
+		AC_LINK_IFELSE([AC_LANG_CALL([], [main])],
+			       [AC_MSG_RESULT(yes)],
+			       [AC_MSG_RESULT(no); CXXFLAGS="$OLDCXXFLAGS"])
+		])
 unset OLDCXXFLAGS
 CXXFLAGS="${CXXFLAGS}"
 AC_SUBST(CXXFLAGS)
