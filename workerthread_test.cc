@@ -52,7 +52,7 @@ TEST_F(WorkerThreadTest, ExitsWithoutWorkQueue)
 TEST_F(WorkerThreadTest, RunAndCancelSelf)
 {
 	int fake_argc = 0;
-	char*  fake_argv = {};
+	char* fake_argv = {};
 	ThreadCanceller c;
 	MockThreadQueue q;
 	WorkerThread* t;

@@ -32,23 +32,28 @@
 
 #include <google/protobuf/stubs/common.h>
 
-#include <QtCore/QMutex>
-#include <QtCore/QMutexLocker>
-#include <QtCore/QQueue>
-#include <QtCore/QScopedPointer>
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QWaitCondition>
+#include <condition_variable>
+#include <mutex>
+#include <queue>
+#include <string>
+#include <vector>
 
 #include <pthread.h>
 
 namespace threadpp
 {
+using std::condition_variable;
+using std::mutex;
+using std::queue;
+using std::string;
+using std::unique_lock;
+using std::vector;
+
 class ThreadError
 {
 public:
 	explicit ThreadError(int err);
-	QString String();
+	string String();
 
 protected:
 	int err_;
@@ -78,9 +83,9 @@ public:
 	virtual void Clear();
 
 protected:
-	QQueue<google::protobuf::Closure*> queued_threads_;
-	QWaitCondition task_availability_;
-	QMutex queue_lock_;
+	queue<google::protobuf::Closure*> queued_threads_;
+	condition_variable task_availability_;
+	mutex queue_lock_;
 };
 
 class Thread
@@ -172,7 +177,7 @@ public:
 
 protected:
 	ThreadQueue tasks_;
-	QVector<WorkerThread*> threads_;
+	vector<WorkerThread*> threads_;
 };
 }  // namespace threadpp
 
