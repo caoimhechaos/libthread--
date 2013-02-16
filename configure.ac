@@ -9,14 +9,6 @@ AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
 LT_INIT
 
-AC_ARG_WITH([qt-includes], [AC_HELP_STRING([--with-qt-includes=DIR],
-	    [Path to the QT headers])], [INCLUDES="$INCLUDES -I${withval}"])
-AC_ARG_WITH([qt-libs], [AC_HELP_STRING([--with-qt-libs=DIR],
-	    [Path to the QT libraries])],
-	    LDFLAGS="${LDFLAGS} -L${withval} -L${withval}"])
-AC_SUBST(INCLUDES)
-AC_SUBST(LDFLAGS)
-
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
@@ -43,7 +35,6 @@ AC_SUBST(CXXFLAGS)
 
 # Checks for libraries.
 GTEST_LIBS=""
-QT_LIBS=""
 PROTO_LIBS=""
 PTHREAD_LIBS=""
 AC_CHECK_LIB([gtest], [main],
@@ -55,24 +46,20 @@ AC_CHECK_LIB([gmock], [main],
 AC_CHECK_LIB([gtest_main], [main],
 	     [GTEST_LIBS="$GTEST_LIBS -lgtest_main"])
 LIBS="$old_LIBS"
-AC_CHECK_LIB([QtCore], [main],
-	     [QT_LIBS="$QT_LIBS -lQtCore"])
-AC_CHECK_LIB([QtNetwork], [main],
-	     [QT_LIBS="$QT_LIBS -lQtNetwork"])
 AC_CHECK_LIB([protobuf], [main],
 	     [PROTO_LIBS="$PROTO_LIBS -lprotobuf"])
 AC_CHECK_LIB([pthread], [main],
 	     [PTHREAD_LIBS="$PTHREAD_LIBS -lpthread"])
-AC_LIBS="$AC_LIBS $QT_LIBS $PROTO_LIBS $PTHREAD_LIBS"
+AC_LIBS="$AC_LIBS $PROTO_LIBS $PTHREAD_LIBS"
 AC_SUBST(GTEST_LIBS)
-AC_SUBST(QT_LIBS)
 AC_SUBST(AC_LIBS)
 AC_SUBST(PROTO_LIBS)
 
 # Checks for header files.
 old_CPPFLAGS="$CPPFLAGS"
 CPPFLAGS="$CPPFLAGS $INCLUDES"
-AC_CHECK_HEADERS([QtCore/QMap QtCore/QString])
+AC_CHECK_HEADERS([condition_variable mutex queue string toolbox/scopedptr.h \
+		  vector])
 CPPFLAGS="$old_CPPFLAGS"
 
 # Checks for typedefs, structures, and compiler characteristics.

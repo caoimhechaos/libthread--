@@ -30,10 +30,9 @@
 #include <google/protobuf/stubs/common.h>
 #include "threadpool.h"
 
-#include <QtCore/QQueue>
-#include <QtCore/QWaitCondition>
-#include <QtCore/QMutex>
-#include <QtCore/QMutexLocker>
+#include <mutex>
+#include <queue>
+#include <condition_variable>
 
 namespace threadpp
 {
@@ -48,20 +47,23 @@ ThreadQueue::~ThreadQueue()
 void
 ThreadQueue::Add(google::protobuf::Closure* t)
 {
-	QMutexLocker l(&queue_lock_);
-	queued_threads_.enqueue(t);
-	task_availability_.wakeAll();
+	unique_lock<mutex> l(queue_lock_);
+	queued_threads_.push(t);
+	task_availability_.notify_all();
 }
 
 google::protobuf::Closure*
 ThreadQueue::GetNextTask()
 {
-	queue_lock_.lock();
+	unique_lock<mutex> l(queue_lock_);
+	google::protobuf::Closure* ret;
 
-	while (queued_threads_.isEmpty())
-		task_availability_.wait(&queue_lock_);
+	while (queued_threads_.empty())
+		task_availability_.wait(l);
 
-	return queued_threads_.dequeue();
+	ret = queued_threads_.front();
+	queued_threads_.pop();
+	return ret;
 }
 
 void
@@ -69,7 +71,7 @@ ThreadQueue::WaitUntilEmpty()
 {
 	queue_lock_.lock();
 
-	while (!queued_threads_.isEmpty())
+	while (!queued_threads_.empty())
 	{
 		queue_lock_.unlock();
 		queue_lock_.lock();
@@ -81,8 +83,8 @@ ThreadQueue::WaitUntilEmpty()
 void
 ThreadQueue::Clear()
 {
-	QMutexLocker l(&queue_lock_);
-	while (!queued_threads_.isEmpty())
-		queued_threads_.dequeue();
+	unique_lock<mutex> l(queue_lock_);
+	while (!queued_threads_.empty())
+		queued_threads_.pop();
 }
 }  // namespace threadpp

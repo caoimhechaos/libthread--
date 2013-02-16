@@ -29,7 +29,7 @@
 
 #include "threadpool.h"
 
-#include <QtCore/QString>
+#include <string>
 #include <pthread.h>
 
 namespace threadpp
@@ -39,12 +39,12 @@ ThreadError::ThreadError(int err)
 {
 }
 
-QString
+string
 ThreadError::String()
 {
 	char buf[128];
 	strerror_r(err_, buf, 128);
-	return QString(buf);
+	return string(buf);
 }
 
 void*

@@ -15,7 +15,7 @@ namespace testing
 class TestThread : public Thread
 {
 public:
-	TestThread(QMutex* mtx, QWaitCondition* done)
+	TestThread(mutex* mtx, condition_variable* done)
 	: done_(done), mtx_(mtx), has_run_(false) {}
 
 	bool HasRun() {
@@ -24,14 +24,14 @@ public:
 
 protected:
 	virtual void Run() {
-		QMutexLocker l(mtx_);
+		unique_lock<mutex> l(*mtx_);
 		Yield();
 		has_run_ = true;
-		done_->wakeAll();
+		done_->notify_all();
 	}
 
-	QWaitCondition* done_;
-	QMutex* mtx_;
+	condition_variable* done_;
+	mutex* mtx_;
 	bool has_run_;
 };
 
@@ -41,17 +41,17 @@ class ThreadTest : public ::testing::Test
 
 TEST_F(ThreadTest, DoesRun)
 {
-	QMutex mtx;
-	QWaitCondition done;
+	mutex mtx;
+	condition_variable done;
 
 	// Lock the done mutex to ensure we won't get the notification before
 	// we're running wait().
-	mtx.lock();
+	unique_lock<mutex> l(mtx);
 
 	TestThread t(&mtx, &done);
 	t.Start();
 	Thread::Yield();
-	done.wait(&mtx);
+	done.wait(l);
 	EXPECT_TRUE(t.HasRun());
 }
 

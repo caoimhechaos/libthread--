@@ -29,18 +29,17 @@
 
 #include "threadpool.h"
 
-#include <QtCore/QMutex>
-#include <QtCore/QMutexLocker>
-#include <QtCore/QQueue>
-#include <QtCore/QVector>
-#include <QtCore/QWaitCondition>
+#include <mutex>
+#include <queue>
+#include <vector>
+#include <condition_variable>
 
 namespace threadpp
 {
 ThreadPool::ThreadPool(uint32_t num_threads)
 {
 	for (unsigned int i = 0; i < num_threads; i++)
-		threads_.append(new WorkerThread(&tasks_));
+		threads_.push_back(new WorkerThread(&tasks_));
 }
 
 ThreadPool::~ThreadPool()

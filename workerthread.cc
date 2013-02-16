@@ -29,7 +29,6 @@
 
 #include "threadpool.h"
 
-#include <QtCore/QScopedPointer>
 #include <pthread.h>
 
 namespace threadpp
