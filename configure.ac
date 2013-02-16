@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([libtoolbox], [0.9.1], [tonnerre@ancient-solutions.com])
+AC_INIT([libtoolbox], [0.10.0], [tonnerre@ancient-solutions.com])
 AC_CONFIG_SRCDIR([threadpool.h])
 AC_CONFIG_HEADERS([config.h])
 
