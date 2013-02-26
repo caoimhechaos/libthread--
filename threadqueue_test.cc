@@ -23,10 +23,16 @@ class ThreadQueueTest : public ::testing::Test
 
 TEST_F(ThreadQueueTest, AddGetTask)
 {
-	google::protobuf::Closure* cl = NewCallback(&Empty);
+	google::protobuf::Closure* cl1 = NewCallback(&Empty);
+	google::protobuf::Closure* cl2 = NewCallback(&Empty);
+	google::protobuf::Closure* cl3 = NewCallback(&Empty);
 	ThreadQueue q;
-	q.Add(cl);
-	EXPECT_EQ(cl, q.GetNextTask());
+	q.Add(cl1);
+	q.Add(cl2);
+	q.Add(cl3);
+	EXPECT_EQ(cl1, q.GetNextTask());
+	EXPECT_EQ(cl2, q.GetNextTask());
+	EXPECT_EQ(cl3, q.GetNextTask());
 }
 
 TEST_F(ThreadQueueTest, WaitUntilEmpty)
