@@ -10,14 +10,4 @@ libthread___la_SOURCES=	closurethread.cc threadqueue.cc threadpool.cc	\
 libthread___la_LDFLAGS=	-version-info ${LIBRARY_VERSION}
 libthread___la_LIBADD=	${AC_LIBS}
 
-thread_test_SOURCES=	thread_test.cc
-thread_test_LDADD=	${GTEST_LIBS} ${lib_LTLIBRARIES}
-
-closurethread_test_SOURCES=	closurethread_test.cc
-closurethread_test_LDADD=	${GTEST_LIBS} ${PROTO_LIBS} ${lib_LTLIBRARIES}
-
-threadqueue_test_SOURCES=	threadqueue_test.cc
-threadqueue_test_LDADD=		${GTEST_LIBS} ${PROTO_LIBS} ${lib_LTLIBRARIES}
-
-workerthread_test_SOURCES=	workerthread_test.cc
-workerthread_test_LDADD=	${GTEST_LIBS} ${PROTO_LIBS} ${lib_LTLIBRARIES}
+${TESTS}:		LDADD="${GTEST_LIBS} ${PROTO_LIBS} ${lib_LTLIBRARIES}"
