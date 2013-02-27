@@ -12,8 +12,10 @@ namespace threadpp
 namespace testing
 {
 using ::testing::InitGoogleMock;
+using ::testing::A;
 using ::testing::Return;
 using google::protobuf::NewCallback;
+using google::protobuf::Closure;
 
 class MockThreadQueue : public ThreadQueue
 {
@@ -56,10 +58,18 @@ TEST_F(WorkerThreadTest, RunAndCancelSelf)
 	ThreadCanceller c;
 	MockThreadQueue q;
 	WorkerThread* t;
+	Closure* closure = NewCallback(&c, &ThreadCanceller::CancelThread, &t);
 
 	InitGoogleMock(&fake_argc, &fake_argv);
 
+	EXPECT_CALL(q, Add(A<Closure*>()))
+		.WillOnce(Return())
+		.RetiresOnSaturation();
+
 	EXPECT_CALL(q, GetNextTask())
+		.WillOnce(Return(NewCallback(&q,
+						&MockThreadQueue::Add,
+						closure)))
 		.WillOnce(Return(NewCallback(&c,
 						&ThreadCanceller::CancelThread,
 						&t)))
