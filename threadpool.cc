@@ -39,7 +39,11 @@ namespace threadpp
 ThreadPool::ThreadPool(uint32_t num_threads)
 {
 	for (unsigned int i = 0; i < num_threads; i++)
-		threads_.push_back(new WorkerThread(&tasks_));
+	{
+		WorkerThread* wt = new WorkerThread(&tasks_);
+		threads_.push_back(wt);
+		wt->Start();
+	}
 }
 
 ThreadPool::~ThreadPool()
