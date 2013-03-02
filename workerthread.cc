@@ -51,7 +51,11 @@ WorkerThread::Run()
 		google::protobuf::Closure* work =
 			queue_->GetNextTask();
 		if (work)
+		{
+			DisableCancellation();
 			work->Run();
+			EnableCancellation();
+		}
 	}
 }
 }  // namespace threadpp

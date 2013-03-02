@@ -114,6 +114,12 @@ protected:
 	// The method to be run when the thread is up.
 	virtual void Run() = 0;
 
+	// Enable cancellation.
+	virtual void EnableCancellation();
+
+	// Disable cancellation.
+	virtual void DisableCancellation();
+
 	// Used by the thread to determine if it was cancelled.
 	virtual bool IsCancelled();
 
