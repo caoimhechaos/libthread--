@@ -58,8 +58,8 @@ ThreadQueue::GetNextTask()
 	unique_lock<mutex> l(queue_lock_);
 	google::protobuf::Closure* ret;
 
-	while (queued_threads_.empty())
-		task_availability_.wait(l);
+	task_availability_.wait(l,
+			[this](){return !this->queued_threads_.empty();});
 
 	ret = queued_threads_.front();
 	queued_threads_.pop();
