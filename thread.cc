@@ -94,6 +94,7 @@ Thread::~Thread()
 void
 Thread::Cancel()
 {
+	pthread_cancel(thread_);
 	cancelled_ = true;
 }
 
@@ -101,6 +102,18 @@ bool
 Thread::IsCancelled()
 {
 	return cancelled_;
+}
+
+void
+Thread::EnableCancellation()
+{
+	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, 0);
+}
+
+void
+Thread::DisableCancellation()
+{
+	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, 0);
 }
 
 void
