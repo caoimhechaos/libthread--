@@ -1,5 +1,6 @@
 TESTS=				threadqueue_test closurethread_test	\
-				thread_test workerthread_test
+				thread_test workerthread_test		\
+				threadpool_test
 check_PROGRAMS=			${TESTS}
 lib_LTLIBRARIES=		libthread++.la
 threadppdir=			${includedir}/thread++
