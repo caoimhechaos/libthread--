@@ -1,3 +1,9 @@
+libthread++ (0.12-1) unstable; urgency=low
+
+  * Fix stopping threads by introducing cancel requests.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 05 Mar 2013 21:21:01 +0100
+
 libthread++ (0.11-1) unstable; urgency=low
 
   * Actually start the thread pool threads.
