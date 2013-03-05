@@ -1,3 +1,9 @@
+libthread++ (0.12-2) unstable; urgency=low
+
+  * Fix recognition of shared libraries.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 05 Mar 2013 22:14:09 +0100
+
 libthread++ (0.12-1) unstable; urgency=low
 
   * Fix stopping threads by introducing cancel requests.
