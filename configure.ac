@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([libtoolbox], [0.12.0], [caoimhechaos@protonmail.com])
+AC_INIT([libthread++], [0.12.0], [caoimhechaos@protonmail.com])
 AC_CONFIG_SRCDIR([threadpool.h])
 AC_CONFIG_HEADERS([config.h])
 
