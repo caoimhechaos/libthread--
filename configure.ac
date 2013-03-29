@@ -59,7 +59,7 @@ AC_SUBST(PROTO_LIBS)
 old_CPPFLAGS="$CPPFLAGS"
 CPPFLAGS="$CPPFLAGS $INCLUDES"
 AC_CHECK_HEADERS([condition_variable mutex queue string toolbox/scopedptr.h \
-		  vector])
+		  vector pthread.h])
 CPPFLAGS="$old_CPPFLAGS"
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -69,7 +69,7 @@ AC_TYPE_UINT32_T
 # Checks for library functions.
 orig_LIBS="$LIBS"
 LIBS="$LIBS $PTHREAD_LIBS"
-AC_CHECK_FUNCS(pthread_yield)
+AC_CHECK_FUNCS(pthread_mutex_init pthread_rwlock_init pthread_yield)
 LIBS="$orig_LIBS"
 
 AC_CONFIG_FILES([Makefile])
