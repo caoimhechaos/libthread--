@@ -1,3 +1,9 @@
+libthread++ (0.13-1) unstable; urgency=low
+
+  * Add an implementation of a basic mutex and an read-write mutex.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 09 Apr 2013 16:10:15 +0200
+
 libthread++ (0.12-2) unstable; urgency=low
 
   * Fix recognition of shared libraries.
