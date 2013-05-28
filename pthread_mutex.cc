@@ -41,8 +41,8 @@
 namespace threadpp
 {
 PthreadMutex::PthreadMutex()
-: mutex_(PTHREAD_MUTEX_INITIALIZER)
 {
+  pthread_mutex_init(&mutex_, NULL);
 }
 
 PthreadMutex::~PthreadMutex()
@@ -70,8 +70,8 @@ PthreadMutex::Unlock()
 }
 
 PthreadReadWriteMutex::PthreadReadWriteMutex()
-: rwlock_(PTHREAD_RWLOCK_INITIALIZER)
 {
+  pthread_rwlock_init(&rwlock_, NULL);
 }
 
 PthreadReadWriteMutex::~PthreadReadWriteMutex()
